@@ -1,6 +1,6 @@
-import { Button, Card, Flex } from "@chakra-ui/react";
+import { Button, Card, Flex, Text } from "@chakra-ui/react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ChangeEvent } from "react";
+
 
 interface TaskCardProp {
   id: string;
@@ -31,8 +31,8 @@ export const TaskCard = ({
           checked={status}
           onChange={taskChangeStatus}
           ml={"10px"}
-        />
-        <Card.Title>{text}</Card.Title>
+        >{text}</Checkbox> 
+        {/*<Text as={status ? "del" : "b"}>{text}</Text>  - можно в чекбокс вставить такой текст, но не нашол инструкции как это работает */}
       </Flex>
       <Button
         colorPalette={"blue"}

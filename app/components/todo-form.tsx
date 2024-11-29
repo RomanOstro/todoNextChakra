@@ -3,11 +3,17 @@ import { ChangeEvent } from "react";
 
 interface ITodoForm {
   value: string;
-  createTask:()=> void;
-  changeInput: (e:ChangeEvent<HTMLInputElement>) => void;
+  createTask: () => void;
+  changeInput: (e: ChangeEvent<HTMLInputElement>) => void;
+  enterDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-export function TodoForm({value, changeInput, createTask}:ITodoForm) {
+export function TodoForm({
+  value,
+  changeInput,
+  createTask,
+  enterDown,
+}: ITodoForm) {
   return (
     <Flex gap={"5px"} p={"5px"}>
       <Input
@@ -18,6 +24,7 @@ export function TodoForm({value, changeInput, createTask}:ITodoForm) {
         outline={"none"}
         value={value}
         onChange={changeInput}
+        onKeyDown={enterDown}
       ></Input>
       <Button
         background={"white"}

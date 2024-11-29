@@ -30,6 +30,7 @@ export default function Home() {
     setTastInput(value);
   };
 
+  //создание новой таски
   const createTask = () => {
     if (taskInput) {
       const newTask = {
@@ -38,12 +39,19 @@ export default function Home() {
         status: false,
       };
 
+      //новая таска вставляется после НЕзавершонных и ДО завершонных
       setTasks([...uncompletedTasks, newTask, ...taskCompleted]);
 
       setTastInput("");
     }
   };
 
+  //Добавление таски по нажатию клавиши Enter
+  const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      createTask();
+    }
+  };
 
   const handleToggleTask = (id: string) => {
     setTasks((tasks) => {
@@ -52,9 +60,8 @@ export default function Home() {
       );
       const taskCompleted = updateTasks.filter((task) => task.status); /// status === true
       const uncompletedTasks = updateTasks.filter((task) => !task.status); /// status === false
-
-      return [...uncompletedTasks, ...taskCompleted]
-      
+      //Завершонные таски вставляются после НЕзавершонных
+      return [...uncompletedTasks, ...taskCompleted];
     });
   };
 
@@ -82,6 +89,7 @@ export default function Home() {
           changeInput={hendleChangeInput}
           value={taskInput}
           createTask={createTask}
+          enterDown={handleEnterDown}
         />
         <Separator variant={"dashed"} size={"md"} mb={"5px"} />
         {tasks.map((task) => (
